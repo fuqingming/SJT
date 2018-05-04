@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_backgrount_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_title"
+        android:id="@+id/title"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_color">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_color"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@color/spliter_line_color"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@color/white_color"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/dark"
+                    android:textSize="@dimen/fifteen" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@color/white_color"
+                    android:id="@+id/rl_pwd"
+                    android:paddingRight="15dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginTop="1dp">
+
+                    <EditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:digits="@string/digits"
+                        android:gravity="center_vertical"
+                        android:hint="新密码"
+                        android:background="@color/white_color"
+                        android:inputType="textPassword"
+                        android:maxLength="18"
+                        android:paddingLeft="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/dark"
+                        android:textSize="@dimen/fifteen"/>
+
+                    <CheckBox
+                        android:id="@+id/cb_see_pwd"
+                        android:layout_width="30dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/seletor_pwd_see_arrow"
+                        android:button="@null"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_next"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/normal_login_mode_bg_selector"
+                android:gravity="center"
+                android:text="下一步"
+                android:textColor="@color/white_color"
+                android:textSize="@dimen/sixteen" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

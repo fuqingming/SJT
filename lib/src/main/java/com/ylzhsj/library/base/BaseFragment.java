@@ -40,9 +40,9 @@ public abstract class BaseFragment extends Fragment {
             }
             return mContentView;
         }
-        mContentView = inflater.inflate(setLayoutResourceID(),container,false);
+        mContentView = inflater.inflate(getLayoutId(),container,false);
 
-        mContentView = inflater.inflate(setLayoutResourceID(), null);
+        mContentView = inflater.inflate(getLayoutId(), null);
         mContext = getContext();
         mLayoutInflater = inflater;
 
@@ -55,7 +55,7 @@ public abstract class BaseFragment extends Fragment {
         return mContentView;
     }
 
-    protected abstract int setLayoutResourceID();
+    protected abstract int getLayoutId();
     protected void init(){
         HttpClient.init(getContext().getApplicationContext(),false);
     }

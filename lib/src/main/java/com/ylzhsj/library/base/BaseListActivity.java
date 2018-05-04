@@ -19,6 +19,7 @@ import com.github.jdsjlzx.util.RecyclerViewStateUtils;
 import com.github.jdsjlzx.view.CommonHeader;
 import com.github.jdsjlzx.view.LoadingFooter;
 import com.ylzhsj.library.R;
+import com.ylzhsj.library.settings.GlobalInstanceStateHelper;
 import com.ylzhsj.library.util.BaseRecyclerAdapter;
 import com.ylzhsj.library.backhandler.BackHandlerHelper;
 import com.ylzhsj.library.http.HttpClient;
@@ -311,5 +312,22 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+
+        // 保存MyApplication中保存的全局变量
+        GlobalInstanceStateHelper.saveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        GlobalInstanceStateHelper.restoreInstanceState(this, savedInstanceState);
     }
 }

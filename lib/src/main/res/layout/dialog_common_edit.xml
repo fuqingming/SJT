@@ -13,19 +13,20 @@
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textSize="@dimen/seventeen"
-			android:textColor="@color/black"
-			android:text="密码"
 			android:layout_gravity="center_horizontal"
-			android:layout_marginTop="20dp"/>
+			android:layout_marginTop="20dp"
+			android:text="修改昵称"
+			android:textColor="@color/black"
+			android:textSize="@dimen/seventeen" />
+
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textSize="@dimen/thirteen"
-			android:textColor="@color/black"
 			android:layout_gravity="center_horizontal"
-			android:text="请输入直播间密码"
-			android:layout_marginTop="4dp"/>
+			android:layout_marginTop="4dp"
+			android:text="请输入新的昵称"
+			android:textColor="@color/black"
+			android:textSize="@dimen/thirteen" />
 		<RelativeLayout
 			android:layout_width="match_parent"
 			android:layout_height="26dp"
@@ -42,14 +43,12 @@
 				android:background="@color/white_color"
 				android:textSize="@dimen/thirteen"
 				android:textColor="@color/black"
-				android:hint="请输入密码"
+				android:hint="请输入昵称"
 				android:textColorHint="@color/dark"
 				android:layout_margin="1dp"
 				android:paddingLeft="4dp"
 				android:paddingRight="4dp"
 				android:maxLength="10"
-				android:inputType="textPassword"
-				android:digits="@string/digits"
 				/>
 		</RelativeLayout>
 	</LinearLayout>

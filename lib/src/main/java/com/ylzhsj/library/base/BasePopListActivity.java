@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -16,6 +17,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.PopupWindow;
+
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.github.jdsjlzx.util.RecyclerViewStateUtils;
@@ -24,6 +26,7 @@ import com.github.jdsjlzx.view.LoadingFooter;
 import com.ylzhsj.library.R;
 import com.ylzhsj.library.backhandler.BackHandlerHelper;
 import com.ylzhsj.library.http.HttpClient;
+import com.ylzhsj.library.settings.GlobalInstanceStateHelper;
 import com.ylzhsj.library.util.Constant;
 import com.ylzhsj.library.util.BaseRecyclerAdapter;
 import com.ylzhsj.library.util.HUDProgressUtils;
@@ -447,12 +450,19 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+
+        // 保存MyApplication中保存的全局变量
+        GlobalInstanceStateHelper.saveInstanceState(outState);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        GlobalInstanceStateHelper.restoreInstanceState(this, savedInstanceState);
     }
 }

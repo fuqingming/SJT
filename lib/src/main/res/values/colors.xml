@@ -32,4 +32,7 @@
     <color name="button_bg_color_pressed">#FCFAF8</color>
     <color name="light_black_line_color">#DCDADA</color>
     <color name="light_blue_color">#037AFF</color>
+    <!-- 矩形背景被选中后的颜色 -->
+    <color name="rect_select_bg_color">#FCFBF9</color>
+    <color name="gray_color">#ECE5D9</color>
 </resources>

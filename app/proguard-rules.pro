@@ -58,6 +58,9 @@
 # 保留support下的所有类及其内部类
 -keep class android.support.** {*;}
 
+#屏蔽警告
+-ignorewarnings
+
 # 保留继承的
 -keep public class * extends android.support.v4.**
 -keep public class * extends android.support.v7.**
@@ -168,7 +171,6 @@
 
  #2.rx
  -dontwarn io.reactivex.**
- -keep io.reactivex.**
  -keepclassmembers class io.reactivex.** { *; }
 
  #3.retrolambda
@@ -213,3 +215,9 @@
     *** get*();
  }
  #RxGalleryFinal  end
+
+#android-pickers
+ -keepattributes InnerClasses,Signature
+ -keepattributes *Annotation*
+ -keep class cn.addapp.pickers.entity.** { *;}
+#android-pickers

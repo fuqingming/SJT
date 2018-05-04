@@ -46,7 +46,7 @@ public class HttpClient {
                 public Response intercept(Chain chain) throws IOException {
                     Request originalRequest = chain.request();
                     Request.Builder requestBuilder = originalRequest.newBuilder()
-                            .header("AppType", "TPOS")
+                            .header("AppType", "POST")
                             .header("Content-Type", "application/json")
                             .header("Accept", "application/json")
                             .method(originalRequest.method(), originalRequest.body());

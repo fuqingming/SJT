@@ -9,6 +9,13 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/dark"/>
+        android:layout_height="wrap_content"
+        android:background="@mipmap/hall_icon"/>
+    <com.ylzhsj.library.view.MyGridView
+        android:id="@+id/gridview_functions"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_color"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"/>
 </LinearLayout>

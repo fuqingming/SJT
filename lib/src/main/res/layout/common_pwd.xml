@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:background="@color/white_color"
+    android:id="@+id/rl_pwd"
+    android:paddingRight="15dp"
+    android:layout_marginBottom="1dp"
+    android:layout_marginTop="1dp">
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:digits="@string/digits"
+        android:gravity="center_vertical"
+        android:hint="密码"
+        android:background="@color/white_color"
+        android:inputType="textPassword"
+        android:maxLength="18"
+        android:paddingLeft="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark"
+        android:textSize="@dimen/fifteen"/>
+
+    <CheckBox
+        android:id="@+id/cb_see_pwd"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:background="@drawable/seletor_pwd_see_arrow"
+        android:button="@null"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
+</RelativeLayout>

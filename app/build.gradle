@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion var.compileSdkVersion
     defaultConfig {
-        applicationId "com.example.vip.sjt"
+        applicationId "com.ylzhsj.sjt"
         minSdkVersion var.minSdkVersion
         targetSdkVersion var.targetSdkVersion
         versionCode var.versionCode
@@ -12,7 +12,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             android.applicationVariants.all { variant ->
                 variant.outputs.all {
@@ -21,21 +22,27 @@ android {
             }
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
-def releaseTime() {
+static def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("GMT+8"))
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile project(path: ':lib')
     compile project(path: ':library')
-    implementation files('libs/universal-image-loader-1.9.4.jar')
 }

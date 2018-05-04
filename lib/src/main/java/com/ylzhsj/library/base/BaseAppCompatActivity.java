@@ -7,9 +7,12 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.WindowManager;
+
 import com.ylzhsj.library.backhandler.BackHandlerHelper;
 import com.ylzhsj.library.http.HttpClient;
+import com.ylzhsj.library.settings.GlobalInstanceStateHelper;
 import com.ylzhsj.library.util.HUDProgressUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
@@ -22,6 +25,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
+    private static final String LOG_TAG = "BaseAppCompatActivity";
     protected KProgressHUD kProgressHUD;
 
     @Override
@@ -97,5 +101,24 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+        Log.d(LOG_TAG, "onSaveInstanceState()");
+
+        // 保存MyApplication中保存的全局变量
+        GlobalInstanceStateHelper.saveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.d(LOG_TAG, "onRestoreInstanceState()");
+
+        GlobalInstanceStateHelper.restoreInstanceState(this, savedInstanceState);
     }
 }

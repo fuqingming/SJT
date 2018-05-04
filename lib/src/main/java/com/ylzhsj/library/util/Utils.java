@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -15,6 +17,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -49,7 +52,7 @@ public class Utils {
     // 设置通用Title
     public static void initCommonTitle(final Activity activity, final String strTitle, Boolean bShowReturnButton)
     {
-        initCommonTitle(activity, strTitle, bShowReturnButton, R.mipmap.back_b_n);
+        initCommonTitle(activity, strTitle, bShowReturnButton, R.mipmap.back_icon);
     }
 
     // 设置通用Title
@@ -181,7 +184,7 @@ public class Utils {
         });
     }
 
-    public static Dialog showCommonDialogEdit(final Context context, final String pwd,final OnTaskSuccessComplete onTaskSuccess)
+    public static Dialog showCommonDialogChangePwd(final Context context, final String strNickname,final OnTaskSuccessComplete onTaskSuccess)
     {
         View vContent = LayoutInflater.from(context).inflate(R.layout.dialog_common_edit, null);
         final Dialog dlg = new Dialog(context, R.style.common_dialog);
@@ -196,6 +199,8 @@ public class Utils {
         lp.width = (int) context.getResources().getDimension(R.dimen.dialog_width);
         dlg.getWindow().setAttributes(lp);
         final EditText etPwd =  vContent.findViewById(R.id.et_password);
+        etPwd.setText(strNickname);
+        etPwd.setSelection(etPwd.getText().length());
         // left button
         Button btnLeft =  vContent.findViewById(R.id.btn_left);
         btnLeft.setOnClickListener(new View.OnClickListener()
@@ -215,16 +220,21 @@ public class Utils {
             @Override
             public void onClick(View v)
             {
-                dlg.dismiss();
                 String strPwd = etPwd.getText().toString().trim();
-                strPwd = MD5.encode(strPwd);
-                if(pwd.equals(strPwd)){
-                    if (onTaskSuccess != null)
-                    {
-                        onTaskSuccess.onSuccess(null);
-                    }
-                }else{
-                    Utils.showToast(context,"密码错误");
+                if (strPwd.isEmpty()) {
+                    Utils.showToast(context, "昵称不能为空");
+                    etPwd.requestFocus();
+                    return;
+                }else if(strPwd.length() < 4){
+                    Utils.showToast(context, "昵称不能少于4个字符");
+                    etPwd.requestFocus();
+                    return;
+                }
+                dlg.dismiss();
+
+                if (onTaskSuccess != null)
+                {
+                    onTaskSuccess.onSuccess(strPwd);
                 }
             }
         });
@@ -798,5 +808,20 @@ public class Utils {
         }
 
         return null;
+    }
+
+    public static String getAppVersionName(Context context)
+    {
+        try
+        {
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
+            return pi.versionName;
+        }
+        catch (Exception e)
+        {
+            Log.e("getAppVersion", "Exception", e);
+            return "";
+        }
     }
 }

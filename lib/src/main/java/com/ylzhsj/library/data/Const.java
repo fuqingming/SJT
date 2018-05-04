@@ -5,6 +5,10 @@ package com.ylzhsj.library.data;
  */
 
 public class Const {
+
+    // 默认密匙，在签到时使用
+    public static final String DEFAULT_WORK_KEY = "a123456789012345678901234567890b";
+
     public class FieldRange
     {
         public static final int PASSWORD_MIN_LEN = 6;		// 密码最小长度

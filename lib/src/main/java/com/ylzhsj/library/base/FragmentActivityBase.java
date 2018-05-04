@@ -5,9 +5,15 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+
+import com.ylzhsj.library.settings.GlobalInstanceStateHelper;
 
 
 public abstract class FragmentActivityBase extends FragmentActivity {
+
+	private static final String LOG_TAG = "FragmentActivityBase";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -45,5 +51,22 @@ public abstract class FragmentActivityBase extends FragmentActivity {
         config.setToDefaults();    
         res.updateConfiguration(config,res.getDisplayMetrics() );  
         return res;  
-    }   
+    }
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState)
+	{
+		super.onSaveInstanceState(outState);
+		Log.d(LOG_TAG, "onSaveInstanceState()");
+
+		// 保存MyApplication中保存的全局变量
+		GlobalInstanceStateHelper.saveInstanceState(outState);
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState)
+	{
+		super.onRestoreInstanceState(savedInstanceState);
+		Log.d(LOG_TAG, "onRestoreInstanceState()");
+	}
 }
