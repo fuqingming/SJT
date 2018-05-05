@@ -1,15 +1,16 @@
 package com.ylzhsj.sjt;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
+import android.content.Context;
+import android.widget.ImageView;
+
 import com.blankj.utilcode.util.Utils;
 import cn.addapp.pickers.common.AppConfig;
 import cn.addapp.pickers.util.LogUtils;
-import cn.finalteam.rxgalleryfinal.utils.ModelUtils;
-import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+
+import com.bumptech.glide.Glide;
 import com.ylzhsj.library.settings.MyApplication;
+import com.yuyh.library.imgsel.ISNav;
+import com.yuyh.library.imgsel.common.ImageLoader;
 
 public class BaseApplication extends MyApplication {
 
@@ -17,16 +18,13 @@ public class BaseApplication extends MyApplication {
     public void onCreate() {
         super.onCreate();
         Utils.init(this);//shardPrefrences
-        //图片选择
-        ModelUtils.setDebugModel(true);
-        Fresco.initialize(this);
-        ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(this);
-        config.threadPriority(Thread.NORM_PRIORITY - 2);
-        config.denyCacheImageMultipleSizesInMemory();
-        config.diskCacheFileNameGenerator(new Md5FileNameGenerator());
-        config.diskCacheSize(50 * 1024 * 1024); // 50 MiB
-        config.tasksProcessingOrder(QueueProcessingType.LIFO);
-        ImageLoader.getInstance().init(config.build());
+
+        ISNav.getInstance().init(new ImageLoader() {//ImageSelector
+            @Override
+            public void displayImage(Context context, String path, ImageView imageView) {
+                Glide.with(context).load(path).into(imageView);
+            }
+        });
 
         //android-pickers
         LogUtils.setIsDebug(cn.addapp.pickers.wheelpicker.BuildConfig.DEBUG);

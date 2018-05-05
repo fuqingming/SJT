@@ -22,10 +22,12 @@ android {
             }
         }
     }
-
-    packagingOptions {
-        exclude 'META-INF/rxjava.properties'
+    lintOptions {
+        abortOnError false
     }
+//    packagingOptions {
+//        exclude 'META-INF/rxjava.properties'
+//    }
 }
 
 static def releaseTime() {
@@ -43,6 +45,6 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'com.yuyh.imgsel:library:2.0.2'//ImageSelector
     compile project(path: ':lib')
-    compile project(path: ':library')
 }

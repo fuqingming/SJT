@@ -10,18 +10,14 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.blankj.utilcode.util.SPUtils;
 import com.ylzhsj.library.base.BaseFragment;
 import com.ylzhsj.library.cache.AsyncImageLoader;
 import com.ylzhsj.library.settings.AppSettings;
 import com.ylzhsj.library.util.Utils;
 import com.ylzhsj.sjt.adapter.ModuleSelectionAdapter;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

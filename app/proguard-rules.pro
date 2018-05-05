@@ -159,65 +159,45 @@
 #http
  -keep class com.tamic.novate.** {*;}
 
-#RxGalleryFinal  start
- #1.support-v7-appcompat
- -keep public class android.support.v7.widget.** { *; }
- -keep public class android.support.v7.internal.widget.** { *; }
- -keep public class android.support.v7.internal.view.menu.** { *; }
-
- -keep public class * extends android.support.v4.view.ActionProvider {
-     public <init>(android.content.Context);
- }
-
- #2.rx
- -dontwarn io.reactivex.**
- -keepclassmembers class io.reactivex.** { *; }
-
- #3.retrolambda
- -dontwarn java.lang.invoke.*
-
- #4.support-v4
- -keep class android.support.v4.** { *; }
- -keep interface android.support.v4.** { *; }
-
- #5.ucrop
- -dontwarn com.yalantis.ucrop**
- -keep class com.yalantis.ucrop** { *; }
- -keep interface com.yalantis.ucrop** { *; }
-
- #6.photoview
- -keep class uk.co.senab.photoview** { *; }
- -keep interface uk.co.senab.photoview** { *; }
-
- #7.rxgalleryfinal
- -keep class cn.finalteam.rxgalleryfinal.ui.widget** { *; }
-
- -keepclassmembers class * extends android.app.Activity {
-    public void *(android.view.View);
- }
- -keepclassmembers enum * {
-     public static **[] values();
-     public static ** valueOf(java.lang.String);
- }
- -keep class * implements android.os.Parcelable {
-   public static final android.os.Parcelable$Creator *;
- }
- -keepclassmembers class **.R$* {
-     public static <fields>;
- }
-
- -keepattributes *Annotation*
- -keepclasseswithmembernames class * {
-     native <methods>;
- }
- -keepclassmembers public class * extends android.view.View {
-    void set*(***);
-    *** get*();
- }
- #RxGalleryFinal  end
-
 #android-pickers
  -keepattributes InnerClasses,Signature
  -keepattributes *Annotation*
  -keep class cn.addapp.pickers.entity.** { *;}
 #android-pickers
+
+#EventBus
+-keepattributes *Annotation*
+-keepclassmembers class ** {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+# Only required if you use AsyncExecutor
+-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
+    <init>(java.lang.Throwable);
+}
+
+#fresco
+# Keep our interfaces so they can be used by other ProGuard rules.
+# See http://sourceforge.net/p/proguard/bugs/466/
+-keep,allowobfuscation @interface com.facebook.common.internal.DoNotStrip
+-keep,allowobfuscation @interface com.facebook.soloader.DoNotOptimize
+# Do not strip any method/class that is annotated with @DoNotStrip
+-keep @com.facebook.common.internal.DoNotStrip class *
+-keepclassmembers class * {
+    @com.facebook.common.internal.DoNotStrip *;
+}
+# Do not strip any method/class that is annotated with @DoNotOptimize
+-keep @com.facebook.soloader.DoNotOptimize class *
+-keepclassmembers class * {
+    @com.facebook.soloader.DoNotOptimize *;
+}
+# Keep native methods
+-keepclassmembers class * {
+    native <methods>;
+}
+-dontwarn okio.**
+-dontwarn com.squareup.okhttp.**
+-dontwarn okhttp3.**
+-dontwarn javax.annotation.**
+-dontwarn com.android.volley.toolbox.**
+-dontwarn com.facebook.infer.**
