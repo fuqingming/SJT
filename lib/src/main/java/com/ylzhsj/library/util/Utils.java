@@ -184,66 +184,6 @@ public class Utils {
         });
     }
 
-    public static Dialog showCommonDialogChangePwd(final Context context, final String strNickname,final OnTaskSuccessComplete onTaskSuccess)
-    {
-        View vContent = LayoutInflater.from(context).inflate(R.layout.dialog_common_edit, null);
-        final Dialog dlg = new Dialog(context, R.style.common_dialog);
-        dlg.setContentView(vContent);
-        dlg.setCanceledOnTouchOutside(false); // 点击窗口外区域不消失
-        dlg.setCancelable(false); // 返回键不消失
-
-        // 必须用代码调整dialog的大小
-        android.view.WindowManager.LayoutParams lp = dlg.getWindow().getAttributes();
-        //lp.width = (int) (MyApplication.s_nScreenWidth * 0.95);
-        //lp.height = (int) (MyApplication.m_nScreenHeight * 0.5);
-        lp.width = (int) context.getResources().getDimension(R.dimen.dialog_width);
-        dlg.getWindow().setAttributes(lp);
-        final EditText etPwd =  vContent.findViewById(R.id.et_password);
-        etPwd.setText(strNickname);
-        etPwd.setSelection(etPwd.getText().length());
-        // left button
-        Button btnLeft =  vContent.findViewById(R.id.btn_left);
-        btnLeft.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                dlg.dismiss();
-
-            }
-        });
-
-        // right button
-        Button btnRight = vContent.findViewById(R.id.btn_right);
-        btnRight.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                String strPwd = etPwd.getText().toString().trim();
-                if (strPwd.isEmpty()) {
-                    Utils.showToast(context, "昵称不能为空");
-                    etPwd.requestFocus();
-                    return;
-                }else if(strPwd.length() < 4){
-                    Utils.showToast(context, "昵称不能少于4个字符");
-                    etPwd.requestFocus();
-                    return;
-                }
-                dlg.dismiss();
-
-                if (onTaskSuccess != null)
-                {
-                    onTaskSuccess.onSuccess(strPwd);
-                }
-            }
-        });
-
-        dlg.show();
-
-        return dlg;
-    }
-
     /**
      * convert px to its equivalent dp
      *
@@ -415,7 +355,7 @@ public class Utils {
                 onRightButtonClickListener);
     }
 
-    public static Dialog showDialog(final Context context,final Intent it)
+    public static Dialog showLogOutDialog(final Context context,final OnTaskSuccessComplete onTaskSuccess)
     {
         View.OnClickListener onLeftButtonClickListener = new View.OnClickListener()
         {
@@ -431,47 +371,80 @@ public class Utils {
             @Override
             public void onClick(View v)
             {
-//                MyApplication.getInstance().exit();
-                context.startActivity(it);
+                if (onTaskSuccess != null)
+                {
+                    onTaskSuccess.onSuccess(null);
+                }
             }
         };
 
         return showCommonDialog(context,
-                "页面跳转",
-                "是否离开当前页面，前往积分兑换码中心，使用兑换码。",
+                "退出登陆",
+                "是否退出登陆。",
                 "取消",
                 onLeftButtonClickListener,
-                "立即前往",
+                "确认",
                 onRightButtonClickListener);
     }
 
-    public static Dialog showDialogLive(final Context context,final Intent it)
+    public static Dialog showCommonDialogChangePwd(final Context context, final String strNickname,final OnTaskSuccessComplete onTaskSuccess)
     {
-        View.OnClickListener onLeftButtonClickListener = new View.OnClickListener()
+        View vContent = LayoutInflater.from(context).inflate(R.layout.dialog_common_edit, null);
+        final Dialog dlg = new Dialog(context, R.style.common_dialog);
+        dlg.setContentView(vContent);
+        dlg.setCanceledOnTouchOutside(false); // 点击窗口外区域不消失
+        dlg.setCancelable(false); // 返回键不消失
+
+        // 必须用代码调整dialog的大小
+        android.view.WindowManager.LayoutParams lp = dlg.getWindow().getAttributes();
+        //lp.width = (int) (MyApplication.s_nScreenWidth * 0.95);
+        //lp.height = (int) (MyApplication.m_nScreenHeight * 0.5);
+        lp.width = (int) context.getResources().getDimension(R.dimen.dialog_width);
+        dlg.getWindow().setAttributes(lp);
+        final EditText etPwd =  vContent.findViewById(R.id.et_password);
+        etPwd.setText(strNickname);
+        etPwd.setSelection(etPwd.getText().length());
+        // left button
+        Button btnLeft =  vContent.findViewById(R.id.btn_left);
+        btnLeft.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                context.startActivity(it);
-            }
-        };
+                dlg.dismiss();
 
-        View.OnClickListener onRightButtonClickListener = new View.OnClickListener()
+            }
+        });
+
+        // right button
+        Button btnRight = vContent.findViewById(R.id.btn_right);
+        btnRight.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Utils.showToast(context,"直播提醒开始");
-            }
-        };
+                String strPwd = etPwd.getText().toString().trim();
+                if (strPwd.isEmpty()) {
+                    Utils.showToast(context, "昵称不能为空");
+                    etPwd.requestFocus();
+                    return;
+                }else if(strPwd.length() < 4){
+                    Utils.showToast(context, "昵称不能少于4个字符");
+                    etPwd.requestFocus();
+                    return;
+                }
+                dlg.dismiss();
 
-        return showCommonDialog(context,
-                "设置提醒",
-                "设置直播提醒，我们将在直播开始前给你发送提示消息",
-                "取消",
-                onLeftButtonClickListener,
-                "确定",
-                onRightButtonClickListener);
+                if (onTaskSuccess != null)
+                {
+                    onTaskSuccess.onSuccess(strPwd);
+                }
+            }
+        });
+
+        dlg.show();
+
+        return dlg;
     }
 
     public static Dialog showDialogClean(final Context context,final TextView tvClean)
@@ -823,5 +796,24 @@ public class Utils {
             Log.e("getAppVersion", "Exception", e);
             return "";
         }
+    }
+
+    /**
+     * 获取当前本地apk的版本
+     *
+     * @param mContext
+     * @return
+     */
+    public static String getVersionCode(Context mContext) {
+        String mVersionName = "";
+        PackageManager packageManager = mContext.getPackageManager();
+        try {
+            PackageInfo packageInfo = packageManager.getPackageInfo(mContext.getPackageName(), 0);
+            mVersionName = packageInfo.versionName;
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "V" + mVersionName;
     }
 }

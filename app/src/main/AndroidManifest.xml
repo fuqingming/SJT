@@ -86,20 +86,20 @@
             android:name=".SetActivity"
             android:screenOrientation="portrait" />
 
+        <!-- 关于-->
+        <activity
+            android:name=".AboutActivity"
+            android:screenOrientation="portrait" />
+
         <!-- 修改密码-->
         <activity
             android:name=".ChangePwdActivity"
             android:screenOrientation="portrait" />
 
-
-        <!-- RxGalleryFinal -->
+        <!-- 绑定手机-->
         <activity
-            android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
-            android:exported="true"/>
-        <activity
-            android:name="com.yalantis.ucrop.UCropActivity"
+            android:name=".ModifyPhoneActivity"
             android:screenOrientation="portrait" />
-        <!-- RxGalleryFinal. -->
     </application>
 
 </manifest>

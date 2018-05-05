@@ -47,15 +47,15 @@ public class SetActivity extends BaseAppCompatActivity {
 
     @Override
     protected void setUpView() {
-        ButterKnife.bind(this);
         Utils.initCommonTitle(this,"个人设置",true);
         AsyncImageLoader.getInstace(this).loadBitmap(m_ivIcon, AppSettings.getHeadPic(), R.mipmap.head_s);
         String strPhone = AppSettings.getPhone().substring(0, 3) + "****" + AppSettings.getPhone().substring(7, 11);
         m_tvPhone.setText(strPhone);
     }
 
-    @OnClick({R.id.ll_icon,R.id.ll_nickname,R.id.btn_logout,R.id.ll_change_pwd,R.id.ll_clean,R.id.ll_about})
+    @OnClick({R.id.ll_icon,R.id.ll_nickname,R.id.btn_logout,R.id.ll_change_pwd,R.id.ll_clean,R.id.ll_about,R.id.ll_phone})
     public void onViewClick(View view){
+        Intent intent;
         switch (view.getId()){
             case R.id.ll_icon:
                 openRadio();
@@ -72,23 +72,36 @@ public class SetActivity extends BaseAppCompatActivity {
                 break;
 
             case R.id.ll_change_pwd:
-                Intent intent = new Intent(SetActivity.this,ChangePwdActivity.class);
+                intent = new Intent(SetActivity.this,ChangePwdActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ll_clean:
                 Utils.showDialogClean(SetActivity.this,m_tvClean);
                 break;
             case R.id.ll_about:
-
+                intent = new Intent(SetActivity.this,AboutActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn_logout:
-                logout();
+                Utils.showLogOutDialog(SetActivity.this,new OnTaskSuccessComplete()
+                {
+                    @Override
+                    public void onSuccess(Object obj)
+                    {
+                        AppSettings.setAutoLogin(false);
+                        AppSettings.setNickname("");
+                        AppSettings.setPhone("");
+                        AppSettings.setUserId("");
+                        Utils.showToast(SetActivity.this,"已退出登陆！");
+                        finish();
+                    }
+                });
+                break;
+            case R.id.ll_phone:
+                intent = new Intent(SetActivity.this,ModifyPhoneActivity.class);
+                startActivity(intent);
                 break;
         }
-    }
-
-    private void logout() {
-
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.ylzhsj.sjt;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.ylzhsj.library.base.BaseFragment;
+import com.ylzhsj.library.settings.AppSettings;
 import com.ylzhsj.library.view.error.ErrorLayout;
 import com.ylzhsj.sjt.adapter.FragmentHallAdapter;
 import com.ylzhsj.sjt.adapter.ModuleSelectionAdapter;
@@ -79,6 +81,11 @@ public class FragmentHall extends BaseFragment {
 		m_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+				if(!AppSettings.isAutoLogin()){
+					Intent it = new Intent(getMContext(),LoginActivity.class);
+					startActivity(it);
+					return;
+				}
 				switch (FunctionIndex.values()[position])
 				{
 					case RENOVATION:

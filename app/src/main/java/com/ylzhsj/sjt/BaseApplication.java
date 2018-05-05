@@ -8,6 +8,7 @@ import cn.addapp.pickers.common.AppConfig;
 import cn.addapp.pickers.util.LogUtils;
 
 import com.bumptech.glide.Glide;
+import com.mob.MobSDK;
 import com.ylzhsj.library.settings.MyApplication;
 import com.yuyh.library.imgsel.ISNav;
 import com.yuyh.library.imgsel.common.ImageLoader;
@@ -31,5 +32,16 @@ public class BaseApplication extends MyApplication {
         if (!LogUtils.isDebug()) {
             android.util.Log.d(AppConfig.DEBUG_TAG, "logcat is disabled");
         }
+
+        MobSDK.init(this, this.getAppkey(), this.getAppSecret());//shareSDK
+    }
+
+    public BaseApplication() {//shareSDK
+    }
+    protected String getAppkey() {//shareSDK
+        return null;
+    }
+    protected String getAppSecret() {//shareSDK
+        return null;
     }
 }
