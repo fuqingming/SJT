@@ -24,8 +24,7 @@
                     android:id="@+id/iv_icon"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:layout_margin="@dimen/twenty"
-                    android:background="@mipmap/head_s"/>
+                    android:layout_margin="@dimen/twenty"/>
                 <TextView
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"

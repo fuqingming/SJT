@@ -47,6 +47,7 @@ public class MainActivity extends FragmentActivityBase {
         AppSettings.setNickname("1111111");
         AppSettings.setPhone("13386174433");
         AppSettings.setUserId("1");
+        AppSettings.setHeadPic("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2966021298,3341101515&fm=23&gp=0.jpg");
 
     }
 

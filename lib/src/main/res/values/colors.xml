@@ -7,6 +7,7 @@
     <color name="red_color">#E42837</color>
     <color name="app_bg_color">#F5EFE5</color>
     <color name="white_color">#FFFFFF</color>
+    <color name="pers30_black">#4c000000</color>
     <!-- 对话框 -->
     <color name="dialog_gray">#F9F9F9</color>
     <color name="black">#ff000000</color>

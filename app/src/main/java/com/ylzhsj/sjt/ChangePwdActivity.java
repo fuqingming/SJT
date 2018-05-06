@@ -132,7 +132,7 @@ public class ChangePwdActivity extends BaseAppCompatActivity {
                 Log.d("",response.toString());
 
                 if(response.getResult()){
-
+                    Utils.showToast(ChangePwdActivity.this,"成功");
                 }else{
                     Utils.showToast(ChangePwdActivity.this,response.getMessage());
                     kProgressHUD.dismiss();
@@ -151,6 +151,7 @@ public class ChangePwdActivity extends BaseAppCompatActivity {
 
             @Override
             public void OnRequestFinish() {
+                kProgressHUD.show();
             }
         });
     }

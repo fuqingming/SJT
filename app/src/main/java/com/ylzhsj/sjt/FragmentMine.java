@@ -10,10 +10,17 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 import com.ylzhsj.library.base.BaseFragment;
 import com.ylzhsj.library.cache.AsyncImageLoader;
 import com.ylzhsj.library.settings.AppSettings;
 import com.ylzhsj.library.util.Utils;
+import com.ylzhsj.library.util.imagetrans.CustomTransform;
+import com.ylzhsj.library.util.imagetrans.MyImageLoad;
+import com.ylzhsj.library.util.imagetrans.MyImageTransAdapter;
+import com.ylzhsj.library.util.imagetrans.MyProgressBarGet;
+import com.ylzhsj.library.util.imagetrans.ScaleType;
 import com.ylzhsj.sjt.adapter.ModuleSelectionAdapter;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -24,6 +31,8 @@ import java.util.List;
 import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
+import it.liuting.imagetrans.ImageTrans;
+import it.liuting.imagetrans.listener.SourceImageViewGet;
 
 /**
  *
@@ -180,9 +189,35 @@ public class FragmentMine extends BaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		AsyncImageLoader.getInstace(getMContext()).loadBitmap(m_ivIcon,AppSettings.getHeadPic());
+//		AsyncImageLoader.getInstace(getMContext()).loadBitmap(m_ivIcon,AppSettings.getHeadPic());
 		if(AppSettings.isAutoLogin()){
-			AsyncImageLoader.getInstace(getMContext()).loadBitmap(m_ivIcon, AppSettings.getHeadPic(), R.mipmap.head_s);
+//			AsyncImageLoader.getInstace(getMContext()).loadBitmap(m_ivIcon, AppSettings.getHeadPic(), R.mipmap.head_s);
+//			Glide.with(getMContext()).load( AppSettings.getHeadPic())
+//					.placeholder(R.drawable.place_holder)
+//					.transform(new CustomTransform(getMContext(), ScaleType.FIT_XY))
+//					.into(m_ivIcon);
+			Glide.with(getMContext()).load(AppSettings.getHeadPic()).placeholder(R.mipmap.head_s).into(m_ivIcon);
+			final List<String> images = new ArrayList<>();
+			images.add(AppSettings.getHeadPic());
+			m_ivIcon.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					ImageTrans.with(getMContext())
+							.setImageList(images)
+							.setSourceImageView(new SourceImageViewGet() {
+								@Override
+								public ImageView getImageView(int pos) {
+									return m_ivIcon;
+								}
+							})
+							.setImageLoad(new MyImageLoad())
+							.setNowIndex(0)
+							.setProgressBar(new MyProgressBarGet())
+							.setAdapter(new MyImageTransAdapter())
+							.show();
+				}
+			});
+
 			m_tvName.setText(AppSettings.getNickname());
 		}else{
 			m_tvName.setText("立即登陆");

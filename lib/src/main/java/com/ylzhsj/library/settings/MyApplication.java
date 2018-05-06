@@ -3,10 +3,11 @@ package com.ylzhsj.library.settings;
 import android.app.Application;
 import android.util.Log;
 
+import com.ylzhsj.library.base.MyTransApplication;
 import com.ylzhsj.library.data.Const;
 import com.ylzhsj.library.util.Utils;
 
-public class MyApplication extends Application
+public class MyApplication extends MyTransApplication
 {
 	private static final String LOG_TAG = "MyApplication";
 	

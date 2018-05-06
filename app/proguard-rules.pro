@@ -158,6 +158,39 @@
 
 #http
  -keep class com.tamic.novate.** {*;}
+# Retrofit
+-dontnote retrofit2.Platform
+-dontnote retrofit2.Platform$IOS$MainThreadExecutor
+-dontwarn retrofit2.Platform$Java8
+-keepattributes Signature
+ -keepattributes Exceptions
+#okhttp
+-dontwarn okhttp3.**
+-keep class okhttp3.**{*;}
+#okio okhttp
+-dontwarn okio.**
+-keep class okio.**{*;}
+# Gson
+#-keep class com.example.testing.retrofitdemo.bean.**{*;} # 自定义数据模型的bean目录
+-keep class com.project.mocha_patient.login.FindForgotInfoActivity$ForgetResponse {*;}
+-keep class com.project.mocha_patient.account_setting.ChangePasswordActivity$ChangePasswordResponse {*;}
+-keep public class com.google.gson.**
+-keep public class com.google.gson.** {public private protected *;}
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep public class com.project.mocha_patient.login.SignResponseData { private *; }
+# Rx
+-dontwarn sun.misc.**
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+ long producerIndex;
+ long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+ rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+ rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
 
 #android-pickers
  -keepattributes InnerClasses,Signature
