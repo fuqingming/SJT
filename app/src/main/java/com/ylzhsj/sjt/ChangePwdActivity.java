@@ -125,8 +125,7 @@ public class ChangePwdActivity extends BaseAppCompatActivity {
 
     private void callHttpForChangePwd(){
         String m_strPhone = AppSettings.getPhone();
-        String urlDataString = "?u_telphone="+m_strPhone+"&u_x_pwd="+m_strMd5Pwd+"&u_y_pwd="+m_strPasswordBellow;
-        HttpClient.get(ApiStores.changePwd + urlDataString, new HttpCallback<ResponseBaseBean>() {
+        HttpClient.get(ApiStores.changePwd ,ApiStores.changePwd(m_strPhone,m_strMd5Pwd,m_strPasswordBellow), new HttpCallback<ResponseBaseBean>() {
             @Override
             public void OnSuccess(ResponseBaseBean response) {
                 Log.d("",response.toString());
@@ -135,7 +134,6 @@ public class ChangePwdActivity extends BaseAppCompatActivity {
                     Utils.showToast(ChangePwdActivity.this,"成功");
                 }else{
                     Utils.showToast(ChangePwdActivity.this,response.getMessage());
-                    kProgressHUD.dismiss();
                 }
             }
 
@@ -151,7 +149,7 @@ public class ChangePwdActivity extends BaseAppCompatActivity {
 
             @Override
             public void OnRequestFinish() {
-                kProgressHUD.show();
+                kProgressHUD.dismiss();
             }
         });
     }

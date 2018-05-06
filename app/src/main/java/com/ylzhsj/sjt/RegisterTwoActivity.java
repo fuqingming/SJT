@@ -106,7 +106,7 @@ public class RegisterTwoActivity extends BaseAppCompatActivity {
 
     private void callHttpForRegister(final String userPhone,String strPassword,String strNickname,String strJoinNum){
         String urlDataString = "?u_telphone="+userPhone+"&strPassword="+strPassword+"&strNickname="+strNickname+"&strJoinNum="+strJoinNum;
-        HttpClient.get(ApiStores.user_register + urlDataString, new HttpCallback<ResponseBaseBean>() {
+        HttpClient.get(ApiStores.user_send_yzm + urlDataString, new HttpCallback<ResponseBaseBean>() {
             @Override
             public void OnSuccess(ResponseBaseBean response) {
                 if(response.getResult()){

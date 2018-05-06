@@ -53,7 +53,7 @@ public class FragmentHall extends BaseFragment {
 	}
 
 	@Override
-	protected int getLayoutId() {
+	protected int setLayoutResourceId() {
 		return R.layout.fragment_hall;
 	}
 
@@ -86,11 +86,13 @@ public class FragmentHall extends BaseFragment {
 					startActivity(it);
 					return;
 				}
+				Intent it ;
 				switch (FunctionIndex.values()[position])
 				{
 					case RENOVATION:
 					{
-
+						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
+						startActivity(it);
 					}
 					break;
 

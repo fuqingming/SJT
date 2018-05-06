@@ -6,22 +6,16 @@ import java.io.Serializable;
  * Created by vip on 2018/5/2.
  */
 
-public class MoneyMakingHallBean implements Serializable{
+public class MyCommentBean implements Serializable{
     private int icon;
     private String name;
-    private String address;
-    private String amount;
     private String time;
-    private String title;
     private String text;
 
-    public MoneyMakingHallBean(int icon, String name, String address, String amount, String time, String title, String text) {
+    public MyCommentBean(int icon, String name, String time,  String text) {
         this.icon = icon;
         this.name = name;
-        this.address = address;
-        this.amount = amount;
         this.time = time;
-        this.title = title;
         this.text = text;
     }
 
@@ -41,36 +35,12 @@ public class MoneyMakingHallBean implements Serializable{
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
     public String getTime() {
         return time;
     }
 
     public void setTime(String time) {
         this.time = time;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getText() {

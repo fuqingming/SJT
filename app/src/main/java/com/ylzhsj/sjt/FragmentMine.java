@@ -66,7 +66,7 @@ public class FragmentMine extends BaseFragment {
 	}
 
 	@Override
-	protected int getLayoutId() {
+	protected int setLayoutResourceId() {
 		return R.layout.fragment_mine;
 	}
 
@@ -101,6 +101,7 @@ public class FragmentMine extends BaseFragment {
 					startActivity(it);
 					return;
 				}
+				Intent it ;
 				switch (FunctionIndex.values()[position])
 				{
 					case MY_OFFER_A_REWARD:
@@ -111,7 +112,8 @@ public class FragmentMine extends BaseFragment {
 
 					case MY_COMMENT:
 					{
-
+						it = new Intent(getMContext(),MyCommentActivity.class);
+						startActivity(it);
 					}
 					break;
 
@@ -129,13 +131,15 @@ public class FragmentMine extends BaseFragment {
 
 					case MY_EWM:
 					{
-
+						it = new Intent(getMContext(),MyEwmActivity.class);
+						startActivity(it);
 					}
 					break;
 
 					case MY_RECOMMEND:
 					{
-
+						it = new Intent(getMContext(),MyRecommentActivity.class);
+						startActivity(it);
 					}
 					break;
 

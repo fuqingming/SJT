@@ -95,7 +95,7 @@ public class ForgetPwdTwoActivity extends BaseAppCompatActivity {
 
     private void callHttpForRegister(final String userPhone,String code){
         String urlDataString = "?u_telphone="+userPhone+"&u_code="+code;
-        HttpClient.get(ApiStores.user_register + urlDataString, new HttpCallback<ResponseBaseBean>() {
+        HttpClient.get(ApiStores.user_send_yzm + urlDataString, new HttpCallback<ResponseBaseBean>() {
             @Override
             public void OnSuccess(ResponseBaseBean response) {
                 if(response.getResult()){

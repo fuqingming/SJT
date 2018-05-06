@@ -72,7 +72,7 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         init();
         kProgressHUD = new HUDProgressUtils().showLoadingImage(this);
-        setContentView(getLayoutId());
+        setContentView(setLayoutResourceId());
         ButterKnife.bind(this);
         mRecyclerView = findViewById(R.id.recycler_view);
         toTopBtn = findViewById(R.id.top_btn);
@@ -86,7 +86,7 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
         HttpClient.init(getApplicationContext(),false);
     }
 
-    protected int getLayoutId() {
+    protected int setLayoutResourceId() {
         return 0;
     }
 
@@ -248,7 +248,7 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
         return Constant.PAGE_SIZE;
     }
 
-    protected void executeOnLoadDataSuccess(List<T> data) {
+    protected void executeOnLoadDataSuccess(List<T> data,boolean isHavaHead) {
         totalPage = data.size();
         if (data == null) {
             data = new ArrayList<T>();
@@ -267,7 +267,12 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
         if (mCurrentPage == 1) {
             mListAdapter.setDataList(data);
             if(mListAdapter.getItemCount() == 0){
-                mErrorLayout.setErrorType(ErrorLayout.NODATA);
+                if(isHavaHead){
+                    mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
+                }else{
+                    mErrorLayout.setErrorType(ErrorLayout.NODATA);
+                }
+
             }
         } else {
             mListAdapter.addAll(data);

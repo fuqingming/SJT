@@ -136,7 +136,7 @@ public class ForgetPwdOneActivity extends BaseAppCompatActivity {
 
     private void callHttpForRegister(final String userPhone,String code){
         String urlDataString = "?u_telphone="+userPhone+"&u_code="+code;
-        HttpClient.get(ApiStores.user_register + urlDataString, new HttpCallback<ResponseBaseBean>() {
+        HttpClient.get(ApiStores.user_send_yzm + urlDataString, new HttpCallback<ResponseBaseBean>() {
             @Override
             public void OnSuccess(ResponseBaseBean response) {
                 if(response.getResult()){
@@ -168,8 +168,7 @@ public class ForgetPwdOneActivity extends BaseAppCompatActivity {
     }
 
     private void callHttpForSendYzm(String userPhone){
-        String urlDataString = "?u_telphone="+userPhone+"&type=1";
-        HttpClient.get(ApiStores.user_send_yzm + urlDataString, new HttpCallback<ResponseBaseBean>() {
+        HttpClient.get(ApiStores.user_send_yzm ,ApiStores.user_send_yzm(userPhone), new HttpCallback<ResponseBaseBean>() {
             @Override
             public void OnSuccess(ResponseBaseBean response) {
                 Log.d("",response.toString());

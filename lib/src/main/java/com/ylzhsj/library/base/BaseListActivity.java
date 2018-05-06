@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
@@ -41,6 +42,7 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
     protected LRecyclerView mRecyclerView;
     protected ErrorLayout mErrorLayout;
     protected Button toTopBtn;
+    protected TextView mNoData;
 
     protected BaseRecyclerAdapter<T> mListAdapter;
     protected LRecyclerViewAdapter mRecyclerViewAdapter;
@@ -62,9 +64,11 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
-        setContentView(getLayoutId());
+        setContentView(setLayoutResourceId());
         ButterKnife.bind(this);
         mRecyclerView = findViewById(R.id.recycler_view);
+
+        mNoData = findViewById(R.id.tv_error_layout);
         toTopBtn = findViewById(R.id.top_btn);
         mErrorLayout = findViewById(R.id.error_layout);
         initData();
@@ -76,7 +80,7 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
         HttpClient.init(getApplicationContext(),false);
     }
 
-    protected int getLayoutId() {
+    protected int setLayoutResourceId() {
         return 0;
     }
 
@@ -238,7 +242,7 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
         return Constant.PAGE_SIZE;
     }
 
-    protected void executeOnLoadDataSuccess(List<T> data) {
+    protected void executeOnLoadDataSuccess(List<T> data,boolean isHavaHead) {
         totalPage = data.size();
         if (data == null) {
             data = new ArrayList<T>();
@@ -257,7 +261,12 @@ public abstract class BaseListActivity<T> extends AppCompatActivity {
         if (mCurrentPage == 1) {
             mListAdapter.setDataList(data);
             if(mListAdapter.getItemCount() == 0){
-                mErrorLayout.setErrorType(ErrorLayout.NODATA);
+                if(isHavaHead){
+                    mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
+                }else{
+                    mErrorLayout.setErrorType(ErrorLayout.NODATA);
+                }
+
             }
         } else {
             mListAdapter.addAll(data);

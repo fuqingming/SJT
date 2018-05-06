@@ -80,7 +80,7 @@ public abstract class BasePopListFragment<T> extends Fragment {
         }
         HttpClient.init(getContext().getApplicationContext(),false);
         mContext = getContext();
-        mContentView = inflater.inflate(getLayoutId(),null);
+        mContentView = inflater.inflate(setLayoutResourceId(),null);
         this.mInflater = inflater;
 
         mRecyclerView = mContentView.findViewById(R.id.recycler_view);
@@ -96,7 +96,7 @@ public abstract class BasePopListFragment<T> extends Fragment {
         return mContentView;
     }
 
-    protected int getLayoutId() {
+    protected int setLayoutResourceId() {
         return 0;
     }
 
@@ -264,7 +264,7 @@ public abstract class BasePopListFragment<T> extends Fragment {
         return Constant.PAGE_SIZE;
     }
 
-    protected void executeOnLoadDataSuccess(List<T> data) {
+    protected void executeOnLoadDataSuccess(List<T> data,boolean isHavaHead) {
         totalPage = data.size();
         if (data == null) {
             data = new ArrayList<T>();
@@ -283,7 +283,12 @@ public abstract class BasePopListFragment<T> extends Fragment {
         if (mCurrentPage == 1) {
             mListAdapter.setDataList(data);
             if(mListAdapter.getItemCount() == 0){
-                mErrorLayout.setErrorType(ErrorLayout.NODATA);
+                if(isHavaHead){
+                    mErrorLayout.setErrorType(ErrorLayout.HIDE_LAYOUT);
+                }else{
+                    mErrorLayout.setErrorType(ErrorLayout.NODATA);
+                }
+
             }
         } else {
             mListAdapter.addAll(data);

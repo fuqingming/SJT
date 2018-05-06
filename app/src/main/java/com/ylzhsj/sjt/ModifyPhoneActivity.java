@@ -163,7 +163,7 @@ public class ModifyPhoneActivity extends BaseAppCompatActivity {
 
     private void callHttpForRegister(final String userPhone,String code,String strPwd){
         String urlDataString = "?u_telphone="+userPhone+"&u_code="+code+"&strPwd="+strPwd;
-        HttpClient.get(ApiStores.user_register + urlDataString, new HttpCallback<ResponseBaseBean>() {
+        HttpClient.get(ApiStores.user_send_yzm + urlDataString, new HttpCallback<ResponseBaseBean>() {
             @Override
             public void OnSuccess(ResponseBaseBean response) {
                 if(response.getResult()){

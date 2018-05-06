@@ -1,53 +1,52 @@
 package com.ylzhsj.sjt;
 
-import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.github.jdsjlzx.ItemDecoration.DividerDecoration;
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.ylzhsj.library.base.BaseListActivity;
-import com.ylzhsj.library.http.ApiStores;
-import com.ylzhsj.library.http.HttpCallback;
-import com.ylzhsj.library.http.HttpClient;
 import com.ylzhsj.library.util.BaseRecyclerAdapter;
 import com.ylzhsj.library.util.Utils;
-import com.ylzhsj.sjt.adapter.MoneyMakingHallAdapter;
-import com.ylzhsj.sjt.bean.base.MoneyMakingHallBean;
-import com.ylzhsj.sjt.bean.response.ResponseBaseBean;
+import com.ylzhsj.sjt.adapter.MyCommentAdapter;
+import com.ylzhsj.sjt.adapter.MyRecommentAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
+public class MyRecommentActivity extends BaseListActivity {
 
-public class MoneyMakingHallActivity extends BaseListActivity {
-    private static final String LOG_TAG = "AboutActivity";
-
-    private MoneyMakingHallAdapter m_moneyMakingHallAdapter = new MoneyMakingHallAdapter();
+    private MyRecommentAdapter m_myCommentAdapter = new MyRecommentAdapter();
 
     @Override
     protected int setLayoutResourceId() {
-        return R.layout.activity_money_making_hall;
+        return R.layout.activity_my_recomment;
     }
 
     @Override
     protected void initData() {
-        Utils.initCommonTitle(this,"赚钱大厅",true);
+        Utils.initCommonTitle(this,"我的推荐",true);
     }
 
     @Override
     protected BaseRecyclerAdapter getListAdapter() {
-        return m_moneyMakingHallAdapter;
+        return m_myCommentAdapter;
     }
 
     @Override
     protected void initLayoutManager() {
         LinearLayoutManager m_linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(m_linearLayoutManager);
-        View m_headerBanner = LayoutInflater.from(this).inflate(R.layout.common_money_making_hall_head,mRecyclerView, false);
+        View m_headerBanner = LayoutInflater.from(this).inflate(R.layout.common_my_recomment_head,mRecyclerView, false);
         mRecyclerViewAdapter.addHeaderView(m_headerBanner);
         mRecyclerView.setLoadMoreEnabled(false);
+        DividerDecoration divider = new DividerDecoration.Builder(this)
+                .setHeight(R.dimen.one)
+                .setColorResource(R.color.spliter_line_color)
+                .build();
+
+        mRecyclerView.addItemDecoration(divider);
+
         mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -82,8 +81,7 @@ public class MoneyMakingHallActivity extends BaseListActivity {
 
     protected void requestData(){
 
-        List<MoneyMakingHallBean> moneyMakingHallBeans = new ArrayList<>();
-        executeOnLoadDataSuccess(moneyMakingHallBeans,true);
+        executeOnLoadDataSuccess(DataUtil.initMyRecomment(),true);
         executeOnLoadFinish();
 //        HttpClient.get(ApiStores.changePwd,ApiStores.changePwd("","",""), new HttpCallback<ResponseBaseBean>() {//ResponseHallBean
 //            @Override
