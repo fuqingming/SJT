@@ -106,7 +106,8 @@ public class FragmentMine extends BaseFragment {
 				{
 					case MY_OFFER_A_REWARD:
 					{
-
+						it = new Intent(getMContext(),MyRewardActivity.class);
+						startActivity(it);
 					}
 					break;
 
@@ -119,13 +120,15 @@ public class FragmentMine extends BaseFragment {
 
 					case MY_MESSAGE:
 					{
-
+						it = new Intent(getMContext(),MyMessageActivity.class);
+						startActivity(it);
 					}
 					break;
 
 					case MY_WALLET:
 					{
-
+						it = new Intent(getMContext(),MyWalletActivity.class);
+						startActivity(it);
 					}
 					break;
 

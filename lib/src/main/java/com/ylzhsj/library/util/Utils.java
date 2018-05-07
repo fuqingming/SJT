@@ -65,6 +65,15 @@ public class Utils {
     }
 
     // 设置通用Title
+    public static void initCommonTitle(	final Activity activity,
+                                           final String strTitle,
+                                           Boolean bShowReturnButton,String right,
+                                           final int strButtonIcon)
+    {
+        initCommonTitle(activity, null, strTitle, bShowReturnButton,right, strButtonIcon);
+    }
+
+    // 设置通用Title
     public static void initCommonTitle(final View vContent, final String strTitle,final int ivIcon)
     {
         initCommonTitle(null,vContent, strTitle,true,ivIcon);
@@ -128,6 +137,16 @@ public class Utils {
         initCommonTitle(activity, null, strTitle, strLeft, strRight);
     }
 
+//    public static void initCommonTitle(	final Activity activity,
+//                                           final String strTitle,
+//                                           Boolean bShowReturnButton,String right,
+//                                           final int strButtonIcon)
+    // 设置通用Title
+    public static void initCommonTitle(final Activity activity, final String strTitle, boolean bShowReturnButton,String strRight)
+    {
+        initCommonTitle(activity, strTitle, bShowReturnButton, strRight, R.mipmap.back_icon);
+    }
+
     // 设置通用Title
     public static void initCommonTitle(	final Activity activity,
                                            final String strTitle,
@@ -176,6 +195,43 @@ public class Utils {
         tvRight.setText(strRight);
 
         tvLeft.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                activity.finish();
+            }
+        });
+    }
+
+    // 设置通用Title
+    public static void initCommonTitle(	final Activity activity,
+                                        final View vContent,
+                                        final String strTitle,
+                                        boolean bShowReturnButton,
+                                        String strRight,
+                                        final int strButtonIcon)
+    {
+        TextView tvTitle = null;
+        ImageView ivBack = null;
+        TextView tvRight = null;
+        if(vContent == null)
+        {
+            tvTitle = activity.findViewById(R.id.tv_title_text);
+            ivBack = activity.findViewById(R.id.iv_title_back);
+            ivBack.setImageDrawable(activity.getResources().getDrawable(strButtonIcon));
+            tvRight = activity.findViewById(R.id.tv_title_right);
+        }
+        else
+        {
+            tvTitle =  vContent.findViewById(R.id.tv_title_text);
+            ivBack = vContent.findViewById(R.id.iv_title_back);
+            ivBack.setImageDrawable(vContent.getResources().getDrawable(strButtonIcon));
+            tvRight =  vContent.findViewById(R.id.tv_title_right);
+        }
+
+        tvTitle.setText(strTitle);
+        tvRight.setText(strRight);
+        ivBack.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {

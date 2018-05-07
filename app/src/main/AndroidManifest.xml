@@ -117,6 +117,42 @@
         <activity
             android:name=".MyEwmActivity"
             android:screenOrientation="portrait" />
+        <!-- 我的消息-->
+        <activity
+            android:name=".MyMessageActivity"
+            android:screenOrientation="portrait" />
+        <!-- 我的悬赏-->
+        <activity
+            android:name=".MyRewardActivity"
+            android:screenOrientation="portrait" />
+        <!-- 我的钱包-->
+        <activity
+            android:name=".MyWalletActivity"
+            android:screenOrientation="portrait" />
+        <!-- 钱包明细-->
+        <activity
+            android:name=".MyWalletDetailsActivity"
+            android:screenOrientation="portrait" />
+        <!-- 钱包明细-->
+        <activity
+            android:name=".MyWalletDetailsListActivity"
+            android:screenOrientation="portrait" />
+        <!-- 提现-->
+        <activity
+            android:name=".ExtractActivity"
+            android:screenOrientation="portrait" />
+        <!-- 我的银行卡-->
+        <activity
+            android:name=".MyBankActivity"
+            android:screenOrientation="portrait" />
+        <!-- 添加银行卡-->
+        <activity
+            android:name=".AddBankActivity"
+            android:screenOrientation="portrait" />
+        <!-- 提现历史-->
+        <activity
+            android:name=".ExtractHistoryActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

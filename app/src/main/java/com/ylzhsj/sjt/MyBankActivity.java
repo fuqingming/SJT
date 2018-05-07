@@ -1,46 +1,52 @@
 package com.ylzhsj.sjt;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
 import android.view.View;
+
+import com.github.jdsjlzx.ItemDecoration.DividerDecoration;
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.ylzhsj.library.base.BaseListActivity;
 import com.ylzhsj.library.util.BaseRecyclerAdapter;
 import com.ylzhsj.library.util.Utils;
-import com.ylzhsj.sjt.adapter.MoneyMakingHallAdapter;
-import com.ylzhsj.sjt.bean.base.MoneyMakingHallBean;
-import java.util.ArrayList;
-import java.util.List;
+import com.ylzhsj.sjt.adapter.MyBankAdapter;
+import com.ylzhsj.sjt.adapter.MyWalletAdapter;
 
-public class MoneyMakingHallActivity extends BaseListActivity {
-    private static final String LOG_TAG = "AboutActivity";
+import butterknife.OnClick;
 
-    private MoneyMakingHallAdapter m_moneyMakingHallAdapter = new MoneyMakingHallAdapter();
+public class MyBankActivity extends BaseListActivity {
+
+    private MyBankAdapter m_myBankAdapter = new MyBankAdapter();
 
     @Override
     protected int setLayoutResourceId() {
-        return R.layout.activity_common_list;
+        return R.layout.activity_my_bank;
     }
 
     @Override
     protected void initData() {
-        Utils.initCommonTitle(this,"赚钱大厅",true);
+        Utils.initCommonTitle(this,"我的银行卡",true);
     }
 
     @Override
     protected BaseRecyclerAdapter getListAdapter() {
-        return m_moneyMakingHallAdapter;
+        return m_myBankAdapter;
     }
 
     @Override
     protected void initLayoutManager() {
         LinearLayoutManager m_linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(m_linearLayoutManager);
-        View m_headerBanner = LayoutInflater.from(this).inflate(R.layout.common_money_making_hall_head,mRecyclerView, false);
-        mRecyclerViewAdapter.addHeaderView(m_headerBanner);
         mRecyclerView.setLoadMoreEnabled(false);
+        DividerDecoration divider = new DividerDecoration.Builder(this)
+                .setHeight(R.dimen.one)
+                .setColorResource(R.color.spliter_line_color)
+                .build();
+
+        mRecyclerView.addItemDecoration(divider);
+
         mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -65,7 +71,7 @@ public class MoneyMakingHallActivity extends BaseListActivity {
         mRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                Intent it = new Intent(this,NewsWebViewActivity.class);
+//                Intent it = new Intent(MyBankActivity.this,MyWalletDetailsActivity.class);
 //                it.putExtra("webViewUrl",m_adapterNewsAnalysisAdapter.getListData().get(position).getDetail_url());
 //                startActivity(it);
             }
@@ -73,10 +79,20 @@ public class MoneyMakingHallActivity extends BaseListActivity {
         });
     }
 
+    @OnClick({R.id.tv_add_bank})
+    public void onViewClick(View view){
+        switch (view.getId()){
+            case R.id.tv_add_bank:
+                Intent it = new Intent(MyBankActivity.this,AddBankActivity.class);
+//                it.putExtra("webViewUrl",m_adapterNewsAnalysisAdapter.getListData().get(position).getDetail_url());
+                startActivity(it);
+                break;
+        }
+    }
+
     protected void requestData(){
 
-        List<MoneyMakingHallBean> moneyMakingHallBeans = new ArrayList<>();
-        executeOnLoadDataSuccess(moneyMakingHallBeans,true);
+        executeOnLoadDataSuccess(DataUtil.initMyBank(),true);
         executeOnLoadFinish();
 //        HttpClient.get(ApiStores.changePwd,ApiStores.changePwd("","",""), new HttpCallback<ResponseBaseBean>() {//ResponseHallBean
 //            @Override

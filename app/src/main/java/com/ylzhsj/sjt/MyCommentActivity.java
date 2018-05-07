@@ -1,11 +1,7 @@
 package com.ylzhsj.sjt;
 
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
 import android.view.View;
-
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration;
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
@@ -13,13 +9,7 @@ import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.ylzhsj.library.base.BaseListActivity;
 import com.ylzhsj.library.util.BaseRecyclerAdapter;
 import com.ylzhsj.library.util.Utils;
-import com.ylzhsj.library.view.recyclerview.RecycleViewDivider;
-import com.ylzhsj.sjt.adapter.MoneyMakingHallAdapter;
 import com.ylzhsj.sjt.adapter.MyCommentAdapter;
-import com.ylzhsj.sjt.bean.base.MoneyMakingHallBean;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MyCommentActivity extends BaseListActivity {
 
@@ -27,7 +17,7 @@ public class MyCommentActivity extends BaseListActivity {
 
     @Override
     protected int setLayoutResourceId() {
-        return R.layout.activity_my_comment;
+        return R.layout.activity_common_list;
     }
 
     @Override

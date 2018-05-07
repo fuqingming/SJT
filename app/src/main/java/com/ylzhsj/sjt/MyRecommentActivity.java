@@ -20,7 +20,7 @@ public class MyRecommentActivity extends BaseListActivity {
 
     @Override
     protected int setLayoutResourceId() {
-        return R.layout.activity_my_recomment;
+        return R.layout.activity_common_list;
     }
 
     @Override
