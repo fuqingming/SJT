@@ -1,8 +1,11 @@
 package com.ylzhsj.sjt;
 
 import com.ylzhsj.sjt.bean.base.ExtarctHistoryBean;
+import com.ylzhsj.sjt.bean.base.MoneyMakingHallBean;
+import com.ylzhsj.sjt.bean.base.MoneyMakingHallTypeBean;
 import com.ylzhsj.sjt.bean.base.MyBankean;
 import com.ylzhsj.sjt.bean.base.MyCommentBean;
+import com.ylzhsj.sjt.bean.base.MyJoinInBean;
 import com.ylzhsj.sjt.bean.base.MyMessageBean;
 import com.ylzhsj.sjt.bean.base.MyRecommentBean;
 import com.ylzhsj.sjt.bean.base.MyRewardBean;
@@ -33,6 +36,18 @@ public class DataUtil {
         List<MyRecommentBean> videoPlayBackBeans = new ArrayList<>();
         videoPlayBackBeans.add(new MyRecommentBean(R.mipmap.head_s,"孙杰","13386174433"));
         videoPlayBackBeans.add(new MyRecommentBean(R.mipmap.head_s,"孙杰","18516549999"));
+        return videoPlayBackBeans;
+    }
+
+    public static List<MyJoinInBean> initMyJoinIn(){
+        List<MyJoinInBean> videoPlayBackBeans = new ArrayList<>();
+        videoPlayBackBeans.add(new MyJoinInBean("申请创业","昵称","等待审核","2018-02-05 12:07","13386174433"));
+        videoPlayBackBeans.add(new MyJoinInBean("申请创业","昵称","等待审核","2018-02-05 12:07","13386174433"));
+        videoPlayBackBeans.add(new MyJoinInBean("申请创业","昵称","等待审核","2018-02-05 12:07","13386174433"));
+        videoPlayBackBeans.add(new MyJoinInBean("申请创业","昵称","等待审核","2018-02-05 12:07","13386174433"));
+        videoPlayBackBeans.add(new MyJoinInBean("申请创业","昵称","等待审核","2018-02-05 12:07","13386174433"));
+        videoPlayBackBeans.add(new MyJoinInBean("申请创业","昵称","等待审核","2018-02-05 12:07","13386174433"));
+        videoPlayBackBeans.add(new MyJoinInBean("申请创业","昵称","等待审核","2018-02-05 12:07","13386174433"));
         return videoPlayBackBeans;
     }
 
@@ -70,6 +85,30 @@ public class DataUtil {
 
         return videoPlayBackBeans;
     }
+
+    public static List<MoneyMakingHallBean> initMoneyType(){
+        List<MoneyMakingHallBean> mDatas = new ArrayList<>();
+        mDatas.add(new MoneyMakingHallBean("装修量房","1"));
+        mDatas.add(new MoneyMakingHallBean("买建材","1"));
+        mDatas.add(new MoneyMakingHallBean("减肥","1"));
+        mDatas.add(new MoneyMakingHallBean("设计师创业","1"));
+        mDatas.add(new MoneyMakingHallBean("项目经理创业","1"));
+        mDatas.add(new MoneyMakingHallBean("戒烟","1"));
+        mDatas.add(new MoneyMakingHallBean("戒酒","1"));
+        mDatas.add(new MoneyMakingHallBean("戒赌","1"));
+        mDatas.add(new MoneyMakingHallBean("卖建材","1"));
+        mDatas.add(new MoneyMakingHallBean("要买房","1"));
+        mDatas.add(new MoneyMakingHallBean("要卖房","1"));
+        mDatas.add(new MoneyMakingHallBean("办户口","1"));
+        mDatas.add(new MoneyMakingHallBean("办积分","1"));
+        mDatas.add(new MoneyMakingHallBean("办居住证","1"));
+        mDatas.add(new MoneyMakingHallBean("找学校","1"));
+        mDatas.add(new MoneyMakingHallBean("招工人","1"));
+        mDatas.add(new MoneyMakingHallBean("找工作","1"));
+
+        return mDatas;
+    }
+
     public static List<ExtarctHistoryBean> initExtractHistory(){
         List<ExtarctHistoryBean> videoPlayBackBeans = new ArrayList<>();
         videoPlayBackBeans.add(new ExtarctHistoryBean("-100.00","2018-04-18","成功","浦发银行（尾号9988）"));

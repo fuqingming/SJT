@@ -1,30 +1,23 @@
 package com.ylzhsj.sjt;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 import com.ylzhsj.library.backhandler.OnTaskSuccessComplete;
 import com.ylzhsj.library.base.BaseAppCompatActivity;
-import com.ylzhsj.library.cache.AsyncImageLoader;
 import com.ylzhsj.library.settings.AppSettings;
 import com.ylzhsj.library.util.CleanMessageUtil;
-import com.ylzhsj.library.util.DirSettings;
-import com.ylzhsj.library.util.FileUtil;
-import com.ylzhsj.library.util.Upload;
 import com.ylzhsj.library.util.Utils;
-import com.yuyh.library.imgsel.ISNav;
-import com.yuyh.library.imgsel.config.ISListConfig;
-
-import java.io.File;
-import java.util.List;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.finalteam.rxgalleryfinal.RxGalleryFinal;
+import cn.finalteam.rxgalleryfinal.imageloader.ImageLoaderType;
+import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
+import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
 
 public class SetActivity extends BaseAppCompatActivity {
     private static final String LOG_TAG = "SetActivity";
@@ -48,7 +41,7 @@ public class SetActivity extends BaseAppCompatActivity {
     @Override
     protected void setUpView() {
         Utils.initCommonTitle(this,"个人设置",true);
-        AsyncImageLoader.getInstace(this).loadBitmap(m_ivIcon, AppSettings.getHeadPic(), R.mipmap.head_s);
+        Glide.with(this).load( AppSettings.getHeadPic()).placeholder(R.mipmap.head_s).into(m_ivIcon);
         String strPhone = AppSettings.getPhone().substring(0, 3) + "****" + AppSettings.getPhone().substring(7, 11);
         m_tvPhone.setText(strPhone);
     }
@@ -58,7 +51,7 @@ public class SetActivity extends BaseAppCompatActivity {
         Intent intent;
         switch (view.getId()){
             case R.id.ll_icon:
-                openRadio();
+                openRadios();
                 break;
             case R.id.ll_nickname:
                 Utils.showCommonDialogChangePwd(SetActivity.this,AppSettings.getNickname(),new OnTaskSuccessComplete()
@@ -115,31 +108,22 @@ public class SetActivity extends BaseAppCompatActivity {
     /**
      * 自定义单选
      */
-    private void openRadio() {
-        ISListConfig config = new ISListConfig.Builder()
-                // 是否多选
-                .multiSelect(false)
-                .btnText("Confirm")
-                // 确定按钮背景色
-                //.btnBgColor(Color.parseColor(""))
-                // 确定按钮文字颜色
-                .btnTextColor(Color.WHITE)
-                // 使用沉浸式状态栏
-                .statusBarColor(Color.parseColor("#3F51B5"))
-                // 返回图标ResId
-                .title("Images")
-                .titleColor(Color.WHITE)
-                .titleBgColor(Color.parseColor("#3F51B5"))
-                .allImagesText("All Images")
-                .needCrop(true)
-                .cropSize(1, 1, 200, 200)
-                // 第一个是否显示相机
-                .needCamera(true)
-                // 最大选择图片数量
-                .maxNum(9)
-                .build();
-
-        ISNav.getInstance().toListActivity(this, config, REQUEST_LIST_CODE);
+    private void openRadios() {
+        RxGalleryFinal
+                .with(this)
+                .image()
+                .radio()
+                .imageLoader(ImageLoaderType.FRESCO)
+                .subscribe(new RxBusResultDisposable<ImageRadioResultEvent>() {
+                    @SuppressLint("NewApi")
+                    @Override
+                    protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) throws Exception {
+                        final String path = imageRadioResultEvent.getResult().getOriginalPath();
+                        m_tvPhone.setText(path);
+                        Utils.showToast(SetActivity.this,path);
+                    }
+                })
+                .openGallery();
     }
 
 //    private ResponseChangeHeadBean transform(String response){
@@ -165,31 +149,4 @@ public class SetActivity extends BaseAppCompatActivity {
 //
 //        return responseChangeHeadBean;
 //    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_LIST_CODE && resultCode == RESULT_OK && data != null) {
-            List<String> pathList = data.getStringArrayListExtra("result");
-            Utils.showToast(this,pathList.get(0));
-//            kProgressHUD.show();
-//            String strUrl = "http://gxt.mqcll.cn/index/User/changePhoto&u_id="+ AppSettings.getUserId();
-//            final String path = pathList.get(0);
-//            File image = new File(path);
-//            new Upload(image,SetActivity.this,kProgressHUD,new OnTaskSuccessComplete()
-//            {
-//                @Override
-//                public void onSuccess(Object obj)
-//                {
-//                                ResponseChangeHeadBean responseChangeHeadBean = transform((String) obj);
-//                                if(responseChangeHeadBean.getResult()){
-//                                    Toast.makeText(MineActivity.this,responseChangeHeadBean.getMessage(),Toast.LENGTH_SHORT).show();
-//                                    SPUtils.getInstance(GlobalVariables.serverSp).put(GlobalVariables.serverUserIcon,responseChangeHeadBean.getU_photo());
-//                                    m_ivIcon.setImageBitmap(finalBitmap);
-//                                    EventBus.getDefault().post(finalBitmap);
-//                                }
-//                }
-//            }).execute(strUrl);
-        }
-    }
 }

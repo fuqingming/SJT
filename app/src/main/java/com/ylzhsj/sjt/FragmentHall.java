@@ -52,6 +52,25 @@ public class FragmentHall extends BaseFragment {
 							   QUIT_DRINKING , GIVE_UP_GAMBLING , INFORMATION
 	}
 
+
+	@BindView(R.id.gridview_functions_will)
+	GridView m_gridViewWill;
+	private List<Map<String, Object>> m_listDataWill;
+	private ModuleSelectionAdapter m_adapterWill;
+
+	private int[] m_arrIconWill = { R.mipmap.maijianvaiwill, R.mipmap.yaomaifang, R.mipmap.yaomaifangwill,
+			R.mipmap.banhukou, R.mipmap.banjifen, R.mipmap.banjuzhuzheng,
+			R.mipmap.zhaoxuexiao, R.mipmap.zhaogongren, R.mipmap.zhaogongzuo };
+
+	private String[] m_arrTextWill = { "卖建材", "要买房", "要卖房",
+			"办户口", "办积分", "办居住证",
+			"找学校", "招工人", "找工作" };
+
+	private enum FunctionIndexWill{MAIJIANVAIWILL, YAOMAIFANG, YAOMAIFANGWILL ,
+		BANHUKOU , BANJIFEN , BANJUZHUZHENG,
+		ZHAOXUEXIAO , ZHAOGONGREN , ZHAOGONGZUO
+	}
+
 	@Override
 	protected int setLayoutResourceId() {
 		return R.layout.fragment_hall;
@@ -139,6 +158,87 @@ public class FragmentHall extends BaseFragment {
 					break;
 
 					case INFORMATION:
+					{
+						it = new Intent(getMContext(),InformationActivity.class);
+						startActivity(it);
+					}
+					break;
+
+					default:
+						break;
+				}
+			}
+		});
+
+		// 获取数据
+		m_listDataWill = getData(m_arrIconWill, m_arrTextWill);
+		m_adapterWill = new ModuleSelectionAdapter(getMContext(), m_listDataWill, nWidth);
+
+		m_gridViewWill.setAdapter(m_adapterWill);
+
+		m_gridViewWill.setSelector(new ColorDrawable(Color.TRANSPARENT));
+
+		m_gridViewWill.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+				if(!AppSettings.isAutoLogin()){
+					Intent it = new Intent(getMContext(),LoginActivity.class);
+					startActivity(it);
+					return;
+				}
+				Intent it ;
+				switch (FunctionIndexWill.values()[position])
+				{
+					case MAIJIANVAIWILL:
+					{
+//						it = new Intent(getMContext(),MoneyMakingHallActivity.class);
+//						startActivity(it);
+					}
+					break;
+
+					case YAOMAIFANG:
+					{
+
+					}
+					break;
+
+					case YAOMAIFANGWILL:
+					{
+
+					}
+					break;
+
+					case BANHUKOU:
+					{
+
+					}
+					break;
+
+					case BANJIFEN:
+					{
+
+					}
+					break;
+
+					case BANJUZHUZHENG:
+					{
+
+					}
+					break;
+
+					case ZHAOXUEXIAO:
+					{
+
+					}
+					break;
+
+					case ZHAOGONGREN:
+					{
+
+					}
+					break;
+
+					case ZHAOGONGZUO:
 					{
 
 					}

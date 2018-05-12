@@ -10,14 +10,15 @@ import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
 
+
 /**
  * Created by liuting on 17/6/1.
  */
 
 public class CustomTransform extends BitmapTransformation {
-    ScaleType scaleType;
+    it.liuting.imagetrans.ScaleType scaleType;
 
-    public CustomTransform(Context context, ScaleType scaleType) {
+    public CustomTransform(Context context, it.liuting.imagetrans.ScaleType scaleType) {
         super(context);
         this.scaleType = scaleType;
     }

@@ -14,6 +14,7 @@ public class MoneyMakingHallBean implements Serializable{
     private String time;
     private String title;
     private String text;
+    private String id;
 
     public MoneyMakingHallBean(int icon, String name, String address, String amount, String time, String title, String text) {
         this.icon = icon;
@@ -23,6 +24,11 @@ public class MoneyMakingHallBean implements Serializable{
         this.time = time;
         this.title = title;
         this.text = text;
+    }
+
+    public MoneyMakingHallBean(String name, String id) {
+        this.name = name;
+        this.id = id;
     }
 
     public int getIcon() {
@@ -79,5 +85,13 @@ public class MoneyMakingHallBean implements Serializable{
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

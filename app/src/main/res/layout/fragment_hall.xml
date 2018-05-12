@@ -27,6 +27,19 @@
                 android:paddingBottom="1dp"
                 android:stretchMode="columnWidth"
                 android:verticalSpacing="1dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/spliter_line_color"/>
+            <com.ylzhsj.library.view.MyGridView
+                android:id="@+id/gridview_functions_will"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:horizontalSpacing="1dp"
+                android:numColumns="3"
+                android:paddingBottom="1dp"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="1dp" />
         </LinearLayout>
     </ScrollView>
 

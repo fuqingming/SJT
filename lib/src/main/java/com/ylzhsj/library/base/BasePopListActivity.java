@@ -319,7 +319,7 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
         return res;
     }
 
-    protected abstract BaseAdapter setInitAdapter() ;
+    protected abstract BaseAdapter setInitAdapter(List<T> bean) ;
     /**
      * 筛选pop
      */
@@ -332,9 +332,9 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
      * @param itemClickListener 列表项点击事件
      */
     public void showFilterPopupWindow(View parentView,
-                                      AdapterView.OnItemClickListener itemClickListener,
-                                      BasePopListActivity.CustomerDismissListener dismissListener) {
-        showFilterPopupWindow(parentView, itemClickListener, dismissListener, 0);
+                                      AdapterView.OnItemClickListener itemClickListener,List<T> bean,
+                                      CustomerDismissListener dismissListener) {
+        showFilterPopupWindow(parentView, itemClickListener,bean, dismissListener, 0);
     }
 
     /**
@@ -344,15 +344,15 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
      * @param itemClickListener 列表项点击事件
      */
     public void showFilterPopupWindow(View parentView,
-                                      AdapterView.OnItemClickListener itemClickListener,
-                                      BasePopListActivity.CustomerDismissListener dismissListener, float alpha) {
+                                      AdapterView.OnItemClickListener itemClickListener,List<T> bean,
+                                      CustomerDismissListener dismissListener, float alpha) {
 
         // 判断当前是否显示
         if (mPopupWindow != null && mPopupWindow.isShowing()) {
             mPopupWindow.dismiss();
             mPopupWindow = null;
         }
-        mPopupWindow = new CommonFilterPop(this, setInitAdapter());
+        mPopupWindow = new CommonFilterPop(this, setInitAdapter(bean));
         mPopupWindow.setOnDismissListener(dismissListener);
         // 绑定筛选点击事件
         mPopupWindow.setOnItemSelectedListener(itemClickListener);
@@ -375,7 +375,7 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
      * @param itemClickListener 点击回调
      * @param tabs              所有的cb(需要几个输入几个就可以,cb1,cb2....)
      */
-    public void filterTabToggle(boolean isChecked, View showView, AdapterView.OnItemClickListener itemClickListener, final CheckBox... tabs) {
+    public void filterTabToggle(boolean isChecked, View showView, AdapterView.OnItemClickListener itemClickListener,List<T> bean, final CheckBox... tabs) {
         if (isChecked) {
             if (tabs.length <= 0) {
                 return;
@@ -385,7 +385,7 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
                 tabs[i].setChecked(false);
             }
 
-            showFilterPopupWindow(showView, itemClickListener, new BasePopListActivity.CustomerDismissListener() {
+            showFilterPopupWindow(showView, itemClickListener, bean,new CustomerDismissListener() {
                 @Override
                 public void onDismiss() {
                     super.onDismiss();
@@ -406,7 +406,7 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
      * @param itemClickListener 点击回调
      * @param tabs              所有的cb(需要几个输入几个就可以,cb1,cb2....)
      */
-    public void filterTabToggleT(boolean isChecked, View showView, AdapterView.OnItemClickListener itemClickListener, final CheckBox... tabs) {
+    public void filterTabToggleT(boolean isChecked, View showView,List<T> bean, AdapterView.OnItemClickListener itemClickListener, final CheckBox... tabs) {
         if (isChecked) {
             if (tabs.length <= 0) {
                 return;
@@ -416,7 +416,7 @@ public abstract class BasePopListActivity<T> extends AppCompatActivity {
                 tabs[i].setChecked(false);
             }
 
-            showFilterPopupWindow(showView, itemClickListener, new BasePopListActivity.CustomerDismissListener() {
+            showFilterPopupWindow(showView, itemClickListener,bean, new CustomerDismissListener() {
                 @Override
                 public void onDismiss() {
                     super.onDismiss();

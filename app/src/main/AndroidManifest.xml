@@ -153,6 +153,22 @@
         <activity
             android:name=".ExtractHistoryActivity"
             android:screenOrientation="portrait" />
+        <!-- 创业加盟-->
+        <activity
+            android:name=".MyJoinInActivity"
+            android:screenOrientation="portrait" />
+        <!-- 咨询与建议-->
+        <activity
+            android:name=".InformationActivity"
+            android:screenOrientation="portrait" />
+
+        <!--RxGalleryFinal-->
+        <activity
+            android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@ android {
         versionCode var.versionCode
         versionName var.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true//cannot exceed 64K
     }
     buildTypes {
         release {
@@ -26,9 +27,9 @@ android {
     lintOptions {
         abortOnError false
     }
-//    packagingOptions {
-//        exclude 'META-INF/rxjava.properties'
-//    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
 static def releaseTime() {
@@ -46,6 +47,9 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile 'com.yuyh.imgsel:library:2.0.2'//ImageSelector
+    compile 'cn.finalteam.rxgalleryfinal:library:1.1.3'
+    //RxGalleryFinal
+    compile 'com.android.support:multidex:1.0.1'
+    //cannot exceed 64K
     compile project(path: ':lib')
 }

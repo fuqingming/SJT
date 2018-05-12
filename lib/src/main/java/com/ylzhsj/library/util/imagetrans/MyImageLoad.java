@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
-import com.ylzhsj.library.util.imagetrans.TileBitmapDrawable;
 import com.ylzhsj.library.util.imagetrans.imageload.OkHttpImageLoad;
 import java.util.HashMap;
 import java.util.regex.Pattern;

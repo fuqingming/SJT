@@ -3,25 +3,43 @@ package com.ylzhsj.sjt;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.ylzhsj.library.base.BaseListActivity;
+import com.ylzhsj.library.base.BasePopListActivity;
 import com.ylzhsj.library.util.BaseRecyclerAdapter;
 import com.ylzhsj.library.util.Utils;
 import com.ylzhsj.sjt.adapter.MoneyMakingHallAdapter;
+import com.ylzhsj.sjt.adapter.MoneyTypeCheckedAdapter;
 import com.ylzhsj.sjt.bean.base.MoneyMakingHallBean;
+import com.ylzhsj.sjt.bean.base.MoneyMakingHallTypeBean;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoneyMakingHallActivity extends BaseListActivity {
+import butterknife.BindView;
+
+public class MoneyMakingHallActivity extends BasePopListActivity<MoneyMakingHallBean> {
     private static final String LOG_TAG = "AboutActivity";
 
     private MoneyMakingHallAdapter m_moneyMakingHallAdapter = new MoneyMakingHallAdapter();
 
+    @BindView(R.id.cb_all_type)
+    CheckBox m_cbAllType;
+    @BindView(R.id.cb_order_by)
+    CheckBox m_cbOrderBy;
+    @BindView(R.id.cb_amount)
+    CheckBox m_cbAmount;
+
     @Override
     protected int setLayoutResourceId() {
-        return R.layout.activity_common_list;
+        return R.layout.activity_money_making_hall;
     }
 
     @Override
@@ -30,7 +48,7 @@ public class MoneyMakingHallActivity extends BaseListActivity {
     }
 
     @Override
-    protected BaseRecyclerAdapter getListAdapter() {
+    protected BaseRecyclerAdapter<MoneyMakingHallBean> getListAdapter() {
         return m_moneyMakingHallAdapter;
     }
 
@@ -71,7 +89,57 @@ public class MoneyMakingHallActivity extends BaseListActivity {
             }
 
         });
+
+        m_cbAllType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+//                if(m_arrTeacherName.size() > 1){
+                    filterTabToggleT(isChecked, m_cbAllType,DataUtil.initMoneyType(),new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+//                            m_strUrl = "t_id="+m_arrTeacherName.get(position).getT_id();
+                            hidePopListView();
+                            onRefreshView();
+                        }
+                    }, m_cbAllType, m_cbOrderBy,m_cbAmount);
+//                }else{
+//                    getTypeTeacher1(isChecked);
+//                }
+
+            }
+        });
+
+        m_cbOrderBy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+//                if(m_arrTeacherName.size() > 1){
+                filterTabToggleT(isChecked, m_cbOrderBy,DataUtil.initMoneyType(),new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+//                            m_strUrl = "t_id="+m_arrTeacherName.get(position).getT_id();
+                        hidePopListView();
+                        onRefreshView();
+                    }
+                }, m_cbOrderBy, m_cbAllType,m_cbAmount);
+//                }else{
+//                    getTypeTeacher1(isChecked);
+//                }
+
+            }
+        });
     }
+
+    @Override
+    protected BaseAdapter setInitAdapter(List<MoneyMakingHallBean> bean) {
+        return new MoneyTypeCheckedAdapter(this,bean);
+    }
+
+//    @Override
+//    protected BaseAdapter setInitAdapter(List<MoneyMakingHallTypeBean> bean) {
+//        return new MoneyTypeCheckedAdapter(this,bean);
+//    }
 
     protected void requestData(){
 

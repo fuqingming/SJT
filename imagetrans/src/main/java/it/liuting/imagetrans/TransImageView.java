@@ -1,5 +1,6 @@
 package it.liuting.imagetrans;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -22,6 +23,7 @@ import it.liuting.imagetrans.listener.OnPullCloseListener;
  * Created by liuting on 18/3/12.
  */
 
+@SuppressLint("AppCompatCustomView")
 public class TransImageView extends ImageView implements TransformAttacher.TransStateChangeListener, View.OnLayoutChangeListener {
 
     private ImageGesturesAttacher imageGesturesAttacher;

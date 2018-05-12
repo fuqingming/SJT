@@ -3,8 +3,7 @@ package com.ylzhsj.sjt;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-import com.blankj.utilcode.util.SPUtils;
+
 import com.ylzhsj.library.base.BaseAppCompatActivity;
 import com.ylzhsj.library.data.Const;
 import com.ylzhsj.library.http.ApiStores;

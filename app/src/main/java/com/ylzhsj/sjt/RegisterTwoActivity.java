@@ -1,6 +1,5 @@
 package com.ylzhsj.sjt;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,13 +11,11 @@ import com.ylzhsj.library.http.HttpCallback;
 import com.ylzhsj.library.http.HttpClient;
 import com.ylzhsj.library.util.MD5;
 import com.ylzhsj.library.util.RegexUtil;
-import com.ylzhsj.library.util.SmsSendCounter;
 import com.ylzhsj.library.util.Utils;
 import com.ylzhsj.library.util.alert.AlertUtils;
 import com.ylzhsj.sjt.bean.response.ResponseBaseBean;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RegisterTwoActivity extends BaseAppCompatActivity {

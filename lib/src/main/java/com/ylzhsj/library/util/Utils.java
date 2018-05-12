@@ -30,6 +30,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.ylzhsj.library.R;
 import com.ylzhsj.library.backhandler.OnTaskSuccessComplete;
+import com.ylzhsj.library.util.imagetrans.MyImageLoad;
+import com.ylzhsj.library.util.imagetrans.MyImageTransAdapter;
+import com.ylzhsj.library.util.imagetrans.MyProgressBarGet;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,6 +43,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import it.liuting.imagetrans.ImageTrans;
+import it.liuting.imagetrans.listener.SourceImageViewGet;
 
 public class Utils {
 
@@ -871,5 +877,21 @@ public class Utils {
             e.printStackTrace();
         }
         return "V" + mVersionName;
+    }
+
+    public static void enlargeImage(Context context,final ImageView m_ivIcon,List<String> images,int position){
+        ImageTrans.with(context)
+                .setImageList(images)
+                .setSourceImageView(new SourceImageViewGet() {
+                    @Override
+                    public ImageView getImageView(int pos) {
+                        return m_ivIcon;
+                    }
+                })
+                .setImageLoad(new MyImageLoad())
+                .setNowIndex(position)
+                .setProgressBar(new MyProgressBarGet())
+                .setAdapter(new MyImageTransAdapter())
+                .show();
     }
 }

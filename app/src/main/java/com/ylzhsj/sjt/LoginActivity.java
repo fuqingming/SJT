@@ -1,7 +1,6 @@
 package com.ylzhsj.sjt;
 
 import android.content.Intent;
-import android.text.Selection;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;

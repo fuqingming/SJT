@@ -29,6 +29,7 @@ public abstract class FragmentActivityBase extends FragmentActivity {
 
 	}
 
+
 	protected abstract void setUpView();
 
 	protected void setUpData(){}

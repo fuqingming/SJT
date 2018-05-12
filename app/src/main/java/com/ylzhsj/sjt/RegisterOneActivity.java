@@ -17,7 +17,6 @@ import com.ylzhsj.library.util.alert.AlertUtils;
 import com.ylzhsj.sjt.bean.response.ResponseBaseBean;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RegisterOneActivity extends BaseAppCompatActivity {
